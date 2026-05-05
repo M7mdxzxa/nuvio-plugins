@@ -72,8 +72,8 @@ files.forEach(filename => {
             /const\s+USER_AGENT\s*=\s*"[^"]*"/g,
             // Pattern 8: var USER_AGENT = "Mozilla..."
             /var\s+USER_AGENT\s*=\s*"[^"]*"/g,
-            // Pattern 9: UA = "Mozilla..."
-            /UA\s*=\s*"[^"]*"/g
+            // Pattern 9: var UA = "Mozilla..."
+            /var\s+UA\s*"[^"]*"/g
         ];
         
         const replacements = [
@@ -84,7 +84,9 @@ files.forEach(filename => {
             `USER_AGENT = '${newUserAgent}'`,
             `USER_AGENT = "${newUserAgent}"`,
             `const USER_AGENT = "${newUserAgent}"`,
-            `var USER_AGENT = "${newUserAgent}"`
+            `var USER_AGENT = "${newUserAgent}"`,
+            `var UA = "${newUserAgent}"`
+            
         ];
         
         patterns.forEach((pattern, index) => {
