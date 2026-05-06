@@ -235,9 +235,10 @@ async function invokeDahmerMovies(title, year, season = null, episode = null) {
 
     for (const variant of titleVariations) {
         const safeVariant = variant.replace(/ /g, '%20').replace(/\(/g, '%28').replace(/\)/g, '%29');
+        const tvBaseUrl = `${DAHMER_MOVIES_API}/tvs/${safeVariant}/`;
         const tryUrl = season === null
             ? `${DAHMER_MOVIES_API}/movies/${safeVariant}/`
-            : `${DAHMER_MOVIES_API}/tvs/${safeVariant}/${season : 'Season%20' + season}/`;
+            : `${tvBaseUrl}Season%20${season}/`;
 
         try {
             const res = await makeRequest(tryUrl);
