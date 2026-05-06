@@ -227,6 +227,7 @@ async function invokeDahmerMovies(title, year, season = null, episode = null) {
     console.log(`[DahmerMovies] Searching for: ${title} (${year})${season ? ` Season ${season}` : ''}${episode ? ` Episode ${episode}` : ''}`);
 
     const titleVariations = [
+        title.replace(/:/g, '') + ' (' + year + ')',
         title.replace(/:/g, '')
     ];
 
