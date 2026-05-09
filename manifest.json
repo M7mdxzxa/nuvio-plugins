@@ -12,7 +12,7 @@
       "filename": "providers/4khdhub.js",
       "enabled": true,
       "formats": ["mkv"],
-      "logo": "https://4khdhub.dad/apple-touch-icon.png",
+      "logo": "https://4khdhub.link/apple-touch-icon.png",
       "contentLanguage": ["en", "hi"]
     },
     {
@@ -102,7 +102,7 @@
       "filename": "providers/hdhub4u.js",
       "enabled": true,
       "formats": ["mkv", "mp4"],
-      "logo": "https://new5.hdhub4u.fo/wp-content/uploads/2021/05/cropped-cropped-1-1-1-2-1-180x180.png",
+      "logo": "https://new1.hdhub4u.limo/wp-content/uploads/2021/05/cropped-cropped-1-1-1-2-1-180x180.png",
       "contentLanguage": ["en", "hi"]
     },
     {
@@ -154,7 +154,7 @@
       "filename": "providers/moviesdrive.js",
       "enabled": true,
       "formats": ["mp4", "mkv", "m3u8"],
-      "logo": "https://new2.moviesdrives.my/apple-touch-icon.png",
+      "logo": "https://new2.moviesdrives.my/wp-content/uploads/2026/01/cropped-Gemini_Generated_Image_qt93aqt93aqt93aq-1-180x180.png",
       "contentLanguage": ["en", "hi"]
     },
     {
