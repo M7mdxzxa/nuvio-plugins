@@ -615,8 +615,7 @@ function search(query) {
     const response = yield fetch(searchUrl, { 
       headers: __spreadProps(__spreadValues({}, HEADERS), {
         "Accept": "application/json",
-        "x-typesense-api-key": "6mZ6u978A6987B654321" // Note: If this fails, paste the key from your DevTools here
-      })
+        "x-typesense-api-key": "6mZ6u978A6987B654321"
     });
     
     const data = yield response.json();
