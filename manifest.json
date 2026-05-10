@@ -16,19 +16,6 @@
       "contentLanguage": ["en", "hi"]
     },
     {
-      "id": "nuvio-animekai",
-      "name": "AnimeKai",
-      "description": "AnimeKai streaming with fast load times, up to 1080p playback, and multi-server support (~5s)",
-      "version": "1.1",
-      "author": "Nuvio Team",
-      "supportedTypes": ["movie", "tv", "anime"],
-      "filename": "providers/animekai.js",
-      "enabled": true,
-      "formats": ["mp4"],
-      "logo": "https://animekai.to/assets/uploads/37585a39fe8c8d8fafaa2c7bfbf5374ecac859ea6a0288a6da2c61f5.png",
-      "contentLanguage": ["en", "ja"]
-    },
-    {
       "id": "nuvio-animepahe",
       "name": "AnimePahe",
       "description": "AnimePahe streaming links with sub and dub support (~6s)",
