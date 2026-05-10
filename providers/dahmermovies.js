@@ -195,7 +195,7 @@ function resolvePath(path, encodedUrl) {
         .replace(/\)/g, '%29');
 
     // Attach bulk proxy prefix
-    const proxiedUrl = `DAHMER_WORKER_API${fullUrl}`;
+const proxiedUrl = `${DAHMER_WORKER_API}${fullUrl}`;
 
     // Calculate raw bytes for sorting
     const sizeBytes = (function(s) {
