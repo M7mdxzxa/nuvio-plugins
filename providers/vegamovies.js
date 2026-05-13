@@ -266,7 +266,7 @@ function extractServersFromVCloud(vcloudUrl, quality, size) {
             }).then(function(downloadUrl) {
                 return {
                     name: `VegaMovies 10Gbps${quality !== 'Unknown' ? ' - ' + quality : ''}`,
-                    title: `${serverInfo.filename}${serverInfo.size ? '\n' + serverInfo.size : ''}`,
+                    title: `${serverInfo.filename}`,
                     url: downloadUrl,
                     quality: quality,
                     size: serverInfo.size,
@@ -288,7 +288,7 @@ function extractServersFromVCloud(vcloudUrl, quality, size) {
 
                 return {
                     name: `VegaMovies FSL${quality !== 'Unknown' ? ' - ' + quality : ''}`,
-                    title: `${serverInfo.filename}${serverInfo.size ? '\n' + serverInfo.size : ''}`,
+                    title: `${serverInfo.filename}`,
                     url: finalUrl,
                     quality: quality,
                     size: serverInfo.size,
