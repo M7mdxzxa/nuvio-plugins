@@ -191,6 +191,8 @@ function resolvePath(path, encodedUrl) {
 
     fullUrl = decodeURIComponent(fullUrl)
         .replace(/ /g, '%20')
+        .replace(/\(/g, '%26')
+        .replace(/\(/g, '%27')
         .replace(/\(/g, '%28')
         .replace(/\)/g, '%29');
 
