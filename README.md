@@ -36,7 +36,7 @@ A curated collection of the best high-quality plugins compiled for the Nuvio str
 | 🎬 VidLink | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 | Shows & Movies | 1080p / 720p
 
 
-**Total Number of Plugins**: **17**
+**Total Number of Plugins**: **18**
 
 ## Disclaimer
 **No content is hosted by this repository.**
