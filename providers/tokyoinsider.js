@@ -290,7 +290,7 @@ async function invokeTokyoInsider(tmdbId, mediaType, seasonNum = null, episodeNu
         const streams = downloadInfoArray.map(function(downloadInfo) {
             return {
                 name: `TokyoInsider${downloadInfo.quality !== 'Unknown' ? ' - ' + downloadInfo.quality : ''}`,
-                title: `${downloadInfo.filename}${downloadInfo.size ? '\n' + downloadInfo.size : ''}`,
+                title: `${downloadInfo.filename}`,
                 url: downloadInfo.url,
                 quality: downloadInfo.quality,
                 size: downloadInfo.size,
