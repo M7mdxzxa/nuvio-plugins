@@ -412,7 +412,7 @@ function getStreams(tmdbId, type, season, episode) {
             title: `${link.meta.title}`,
             url: link.url,
             quality: sourceResult.meta.height ? `${sourceResult.meta.height}p` : void 0,
-            size: size || undefined,
+            fileSize: link.meta.bytes ? formatBytes(link.meta.bytes) : void 0,
             behaviorHints: {
               bingeGroup: `4khdhub-${link.source}`
             }
