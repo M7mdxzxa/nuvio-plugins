@@ -235,6 +235,9 @@ function getStreams(tmdbId, mediaType = "movie", season = null, episode = null) 
           headers: {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
             "Referer": "MovieBlast",
+            "Accept-Encoding": "identity",
+            "Connection": "Keep-Alive",
+            "Icy-MetaData": "1",
             "x-request-x": "com.movieblast"
           },
           provider: "movieblast"
