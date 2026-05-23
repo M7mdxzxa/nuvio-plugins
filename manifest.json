@@ -29,6 +29,19 @@
       "contentLanguage": ["en", "ja"]
     },
     {
+      "id": "nuvio-bollyflix",
+      "name": "BollyFlix",
+      "description": "BollyFlix streaming with multiple qualities and languages (~7s)",
+      "version": "1.0",
+      "author": "raymondnoodles",
+      "supportedTypes": ["movie", "tv", "anime"],
+      "filename": "providers/bollyflix.js",
+      "enabled": true,
+      "formats": ["mkv", "mp4"],
+      "logo": "https://files.catbox.moe/tqosr8.png",
+      "contentLanguage": ["en", "hi", "ta", "te", "ja", "pa", "ml", "ko"]
+    }, 
+    {
       "id": "nuvio-dahmermovies",
       "name": "DahmerMovies",
       "description": "DahmerMovies streaming service. Provides high-quality links for movies & shows (~5s)",
