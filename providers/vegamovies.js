@@ -180,6 +180,24 @@ function extractVCloudFromNexdrive(nexdriveUrl) {
     });
 }
 
+// Pick the right Referer based on final URL domain
+function getReferer(finalUrl, fallback) {
+    try {
+        if (finalUrl.includes('googleusercontent.com') || finalUrl.includes('googleapis.com')) {
+            return 'https://drive.google.com/';
+        }
+        if (finalUrl.includes('gamerxyt.com')) {
+            return 'https://gamerxyt.com/';
+        }
+        // Use the vcloud domain as fallback
+        if (fallback) {
+            const match = fallback.match(/^(https?:\/\/[^\/]+)/);
+            if (match) return match[1] + '/';
+        }
+    } catch (e) {}
+    return BASE_URL + '/';
+}
+
 // Extract download servers from V-Cloud page
 function extractServersFromVCloud(vcloudUrl, quality, size) {
     console.log(`[VegaMovies] Processing V-Cloud: ${vcloudUrl}`);
@@ -280,20 +298,21 @@ function extractServersFromVCloud(vcloudUrl, quality, size) {
                     if (linkMatch) {
                         const googleLink = decodeURIComponent(linkMatch[1]);
                         console.log(`[VegaMovies] Extracted link from parameter: ${googleLink.substring(0, 100)}...`);
-                        return googleLink;
+                        return { url: googleLink, referer: 'https://gamerxyt.com/' };
                     }
                 }
 
-                return finalUrl;
-            }).then(function(downloadUrl) {
+                return { url: finalUrl, referer: getReferer(finalUrl, vcloudUrl) };
+            }).then(function(result) {
                 return {
                     name: `VegaMovies G-Drive${quality !== 'Unknown' ? ' - ' + quality : ''}`,
                     title: `${serverInfo.filename}`,
-                    url: downloadUrl,
+                    url: result.url,
                     quality: quality,
                     size: serverInfo.size,
                     headers: {
-                        'User-Agent': HEADERS['User-Agent']
+                        'User-Agent': HEADERS['User-Agent'],
+                        'Referer': result.referer
                     },
                     provider: 'vegamovies'
                 };
@@ -315,7 +334,8 @@ function extractServersFromVCloud(vcloudUrl, quality, size) {
                     quality: quality,
                     size: serverInfo.size,
                     headers: {
-                        'User-Agent': HEADERS['User-Agent']
+                        'User-Agent': HEADERS['User-Agent'],
+                        'Referer': getReferer(finalUrl, vcloudUrl)
                     },
                     provider: 'vegamovies'
                 };
@@ -335,7 +355,8 @@ function extractServersFromVCloud(vcloudUrl, quality, size) {
                     quality: quality,
                     size: serverInfo.size,
                     headers: {
-                        'User-Agent': HEADERS['User-Agent']
+                        'User-Agent': HEADERS['User-Agent'],
+                        'Referer': getReferer(response.url, vcloudUrl)
                     },
                     provider: 'vegamovies'
                 };
