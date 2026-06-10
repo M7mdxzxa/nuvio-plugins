@@ -1,6 +1,6 @@
 /**
- * AniNeko Provider for Nuvio Plugins
- * Scrapes from anineko.to and grabs from multiple servers
+ * AniNeko Provider for Nuvio
+ * Scrapes from https://anineko.to
  */
 
 var PROVIDER_NAME = "AniNeko";
@@ -379,7 +379,7 @@ function getStreams(tmdbId, mediaType, season, episode) {
         return result.streams.map(function(s) {
           return {
             name: PROVIDER_NAME + " [" + s.serverName + "] " + s.label + " - HD",
-            title: streamTitle + " • " + s.serverTitle,
+            title: s.serverName + " (" + s.label + ") 1080p",
             url: s.streamUrl,
             quality: "Auto",
             headers: {
