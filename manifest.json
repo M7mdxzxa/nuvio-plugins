@@ -29,6 +29,19 @@
       "contentLanguage": ["en", "ja"]
     },
     {
+      "id": "nuvio-anineko",
+      "name": "AniNeko",
+      "description": "AniNeko streaming with multiple servers in good quality (~5s)",
+      "version": "1.0",
+      "author": "raymondnoodles",
+      "supportedTypes": ["movie", "tv"],
+      "filename": "providers/anineko.js",
+      "enabled": true,
+      "formats": ["m3u8"],
+      "logo": "https://files.catbox.moe/qlvz36.jpeg",
+      "contentLanguage": ["en", "ja"]
+    },
+    {
       "id": "nuvio-bollyflix",
       "name": "BollyFlix",
       "description": "BollyFlix streaming with multiple qualities and languages (~7s)",
