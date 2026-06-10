@@ -1,16 +1,14 @@
 /**
  * AniNeko Provider for Nuvio
- * Website: https://anineko.to
- * Supports: Anime (TV)
- * Servers: HD-1, HD-2 (vibeplayer), StreamHG, Earnvids (p.a.c.k.e.r), Doodstream
+ * Acrapes from anineko.to
  */
 
 var PROVIDER_NAME = "AniNeko";
 var BASE_URL = "https://anineko.to";
-var TMDB_KEY = "439c478a771f35c05022f9feabcca01c";
+var TMDB_KEY = "1c29a5198ee1854bd5eb45dbe8d17d92";
 
 var DEFAULT_HEADERS = {
-  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
   "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
   "Accept-Language": "en-US,en;q=0.9",
   "Referer": BASE_URL + "/"
