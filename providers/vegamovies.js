@@ -225,7 +225,7 @@ function extractServersFromVCloud(vcloudUrl, quality, size) {
             }
 
             if (!serverUrl) {
-                const fslButtonRegex = /<a[^>]+href=["']([^"']+)["'][^>]*>(?:[^<]|<(?!\/a>))*Download[^<]*\[?FSL[^<]*Server[^<]*\]?(?:[^<]|<(?!\/a>))*<\/a>/gi;
+                const fslButtonRegex = /<a[^>]+href=["']([^"']+)["'][^>]*>(?:[^<]|<(?!\/a>))*Download[^<]*\[?FSLv2[^<]*Server[^<]*\]?(?:[^<]|<(?!\/a>))*<\/a>/gi;
                 match = fslButtonRegex.exec(downloadHtml);
                 if (match) {
                     serverUrl = match[1];
@@ -294,7 +294,6 @@ function extractServersFromVCloud(vcloudUrl, quality, size) {
                     size: serverInfo.size,
                     headers: {
                         'User-Agent': HEADERS['User-Agent']
-                        'Referer': 'https://drive.google.com/'
                     },
                     provider: 'vegamovies'
                 };
