@@ -25,10 +25,8 @@ A curated collection of the best plugins compiled for the Nuvio streaming applic
 | [![FASbMFZz](https://ruayamo.s-ul.eu/FASbMFZz)](https://postimg.cc/sGdR052X) FaselHD | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇦🇪 | Shows & Movies | 1080p / 720p
 | [![QamCog9I](https://ruayamo.s-ul.eu/QamCog9I)](https://postimg.cc/5QS8YH3N) FilmModu | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇹🇷 | Shows & Movies | 1080p / 720p
 | [![download-(2).png](https://i.postimg.cc/cJ6s6jq8/download-(2).png)](https://postimg.cc/CZTyQcxF) HDHub4u | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇮🇳 | Shows & Movies | 4K / 1080p / 720p
-| [![JYryAtEn](https://ruayamo.s-ul.eu/JYryAtEn)](https://postimg.cc/hJJCb5bv) HindMoviez | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇮🇳 | Shows & Movies | 4K / 1080p / 720p
 | [![4RPU1nrB](https://ruayamo.s-ul.eu/4RPU1nrB)](https://postimg.cc/tnNFZ15p) KissKH | 🇰🇷 🇨🇳 🇯🇵 🇹🇭 | Asian Dramas & Movies | 1080p / 720p
 | [![yCuUJlvP](https://ruayamo.s-ul.eu/yCuUJlvP)](https://postimg.cc/ykh7tp9T) MovieBlast | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇮🇳 | Shows & Movies | 1080p / 720p
-| [![moviesdrive.png](https://i.postimg.cc/PrKhFqtK/moviesdrive.png)](https://postimg.cc/56HZXbQF) MoviesDrive | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 | Shows & Movies | 4K / 1080p / 720p
 | [![0lxldV5e](https://ruayamo.s-ul.eu/0lxldV5e)](https://postimg.cc/p5JKh9ZV) Movix | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇫🇷 | Shows & Movies | 1080p / 720p
 | [![showbox.png](https://i.postimg.cc/nzzVyqYQ/showbox.png)](https://postimg.cc/67kNR2P9) ShowBox | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 | Shows & Movies | 4K / 1080p / 720p
 | [![8v3IFJsp](https://ruayamo.s-ul.eu/8v3IFJsp)](https://postimg.cc/DJYGs7yY) TokyoInsider | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇯🇵 | Anime (Shows & Movies) | 1080p / 720p
@@ -38,7 +36,7 @@ A curated collection of the best plugins compiled for the Nuvio streaming applic
 | 🎬 VidLink | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 | Shows & Movies | 1080p / 720p
 
 
-**Total Number of Plugins**: **20**
+**Total Number of Plugins**: **18**
 
 ## Disclaimer
 **No content is hosted by this repository.**
