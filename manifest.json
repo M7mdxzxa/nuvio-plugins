@@ -119,19 +119,6 @@
       "contentLanguage": ["en", "hi"]
     },
     {
-      "id": "nuvio-hindmoviez",
-      "name": "HindMoviez",
-      "author": "Sanchit",
-      "description": "HindMoviez - Hindi & English Movies and Series (~7s)",
-      "version": "1.0",
-      "supportedTypes": ["movie", "tv"],
-      "filename": "providers/hindmoviez.js",
-      "enabled": true,
-      "formats": ["mp4", "mkv", "m3u8"],
-      "logo": "https://i.postimg.cc/5t55Csm4/hindmoviez.png",
-      "contentLanguage": ["en", "hi"]
-    },
-    {
       "id": "nuvio-kisskh",
       "name": "KissKH",
       "description": "Stream Korean dramas and movies from kisskh.ovh (~6s)",
@@ -156,19 +143,6 @@
       "formats": ["mp4", "mkv"],
       "logo": "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/movieblast.png",
       "contentLanguage": ["en", "hi", "te"]
-    },
-    {
-      "id": "nuvio-moviesdrive",
-      "name": "MoviesDrive",
-      "description": "MoviesDrive - Movies and TV shows with multiple streaming servers (~7s)",
-      "version": "2.0",
-      "author": "JK",
-      "supportedTypes": ["movie", "tv"],
-      "filename": "providers/moviesdrive.js",
-      "enabled": true,
-      "formats": ["mp4", "mkv", "m3u8"],
-      "logo": "https://new2.moviesdrives.my/wp-content/uploads/2026/01/cropped-Gemini_Generated_Image_qt93aqt93aqt93aq-1-180x180.png",
-      "contentLanguage": ["en", "hi"]
     },
     {
       "id": "nuvio-movix",
