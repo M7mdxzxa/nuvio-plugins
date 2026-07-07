@@ -78,7 +78,7 @@ var __async = (__this, __arguments, generator) => {
 var import_cheerio_without_node_native = __toESM(require("cheerio-without-node-native"));
 
 // src/animepahe/constants.js
-var MAIN_URL = "https://animepahe.pw";
+var MAIN_URL = "https://animepahe.com";
 var PROXY_URL = "https://animepaheproxy.phisheranimepahe.workers.dev/?url=";
 var HEADERS = {
   "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/147.0.0.0 Safari/537.36",
@@ -89,11 +89,19 @@ var HEADERS = {
 // src/animepahe/utils.js
 function fetchText(_0) {
   return __async(this, arguments, function* (url, options = {}) {
-    const _a = options, { useProxy = true } = _a, fetchOptions = __objRest(_a, ["useProxy"]);
-    const finalUrl = url.startsWith("http") ? url : `${MAIN_URL}${url}`;
+    const _a = options, { useProxy = false } = _a, fetchOptions = __objRest(_a, ["useProxy"]);
+    const settings = globalThis.SCRAPER_SETTINGS || {};
+    const domain = settings.domain || MAIN_URL;
+    const finalUrl = url.startsWith("http") ? url : `${domain}${url}`;
     const targetUrl = useProxy ? `${PROXY_URL}${encodeURIComponent(finalUrl)}` : finalUrl;
+    const isAnimePaheUrl = finalUrl.includes("animepahe.");
     const response = yield fetch(targetUrl, __spreadValues({
-      headers: HEADERS
+      headers: __spreadValues(__spreadProps(__spreadValues({}, HEADERS), {
+        "Referer": `${domain}/`
+      }), fetchOptions.headers),
+      cfKiller: isAnimePaheUrl,
+      // Only activate native bypass for AnimePahe domains
+      skipSizeCheck: true
     }, fetchOptions));
     if (!response.ok)
       throw new Error(`HTTP ${response.status} on ${finalUrl}`);
@@ -181,13 +189,14 @@ function extractKwik(url) {
     try {
       const settings = globalThis.SCRAPER_SETTINGS || {};
       const baseUrl = settings.domain || "https://animepahe.com";
-      const html = yield fetchText(url, {
+      const res = yield fetch(url, {
         headers: __spreadProps(__spreadValues({}, HEADERS), {
           "Referer": `${baseUrl}/`,
           "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
-        }),
-        useProxy: false
+        })
       });
+      const finalUrl = res.url || url;
+      const html = yield res.text();
       const scripts = html.match(/<script.*?>([\s\S]*?)<\/script>/g) || [];
       const matches = [];
       for (const script of scripts) {
@@ -212,10 +221,19 @@ function extractKwik(url) {
         const unpacked = unpack(scriptContent);
         const m3u8Match = unpacked.match(/source\s*=\s*'([^']+m3u8[^']*)'/) || unpacked.match(/source\s*=\s*"([^"]+m3u8[^"]*)"/);
         if (m3u8Match) {
+          const m3u8Url = m3u8Match[1];
+          const titleMatch = html.match(/<title>([\s\S]*?)<\/title>/);
+          const title = titleMatch ? titleMatch[1].trim() : "video";
+          const fileName = title.endsWith(".mp4") ? title : title + ".mp4";
+          const urlParts = m3u8Url.replace("/stream/", "/mp4/").split("/");
+          urlParts.pop();
+          const mp4Base = urlParts.join("/");
+          const mp4Url = `${mp4Base}?file=${encodeURIComponent(fileName)}`;
           return {
-            url: m3u8Match[1],
+            m3u8: m3u8Url,
+            mp4: mp4Url,
             headers: {
-              "Referer": "https://kwik.cx/",
+              "Referer": finalUrl,
               "Origin": "https://kwik.cx",
               "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
             }
@@ -224,6 +242,106 @@ function extractKwik(url) {
       }
     } catch (e) {
       console.error("[AnimePahe] Kwik extraction failed:", e.message);
+    }
+    return null;
+  });
+}
+function paheDecrypt(fullString, key, v1, v2) {
+  const keyIndexMap = {};
+  for (let i2 = 0; i2 < key.length; i2++)
+    keyIndexMap[key[i2]] = i2;
+  let result = "";
+  let i = 0;
+  const toFind = key[v2];
+  while (i < fullString.length) {
+    const nextIndex = fullString.indexOf(toFind, i);
+    if (nextIndex === -1)
+      break;
+    let decodedCharStr = "";
+    for (let j = i; j < nextIndex; j++) {
+      decodedCharStr += keyIndexMap[fullString[j]];
+    }
+    i = nextIndex + 1;
+    const decodedChar = String.fromCharCode(parseInt(decodedCharStr, v2) - v1);
+    result += decodedChar;
+  }
+  return result;
+}
+function extractPahe(url) {
+  return __async(this, null, function* () {
+    try {
+      const initUrl = url.endsWith("/i") ? url : `${url}/i`;
+      const initRes = yield fetch(initUrl, {
+        method: "GET",
+        redirect: "manual",
+        headers: {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+          "Referer": "https://pahe.win/"
+        }
+      });
+      const redirectLoc = initRes.headers.get("location") || initRes.headers.get("Location");
+      if (!redirectLoc)
+        return null;
+      const kwikUrl = redirectLoc.startsWith("http") ? redirectLoc : `https://${redirectLoc.replace(/^\/+/, "")}`;
+      const kwikRes = yield fetch(kwikUrl, {
+        method: "GET",
+        headers: {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+          "Referer": "https://kwik.cx/"
+        }
+      });
+      const html = yield kwikRes.text();
+      const setCookieHeader = kwikRes.headers.get("set-cookie") || kwikRes.headers.get("Set-Cookie");
+      let cookie = "";
+      if (setCookieHeader) {
+        cookie = setCookieHeader.split(";")[0];
+      }
+      const kwikParamsRegex = /\("(\w+)",\d+,"(\w+)",(\d+),(\d+),\d+\)/;
+      const match = html.match(kwikParamsRegex);
+      if (!match)
+        return null;
+      const [_, fullString, key, v1, v2] = match;
+      const decrypted = paheDecrypt(fullString, key, parseInt(v1), parseInt(v2));
+      const actionMatch = decrypted.match(/action="([^"]+)"/);
+      const tokenMatch = decrypted.match(/value="([^"]+)"/);
+      if (!actionMatch || !tokenMatch)
+        return null;
+      const postUri = actionMatch[1];
+      const token = tokenMatch[1];
+      const formData = new URLSearchParams();
+      formData.append("_token", token);
+      let tries = 0;
+      let postRes = null;
+      let location = null;
+      while (tries < 20) {
+        postRes = yield fetch(postUri, {
+          method: "POST",
+          redirect: "manual",
+          headers: {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+            "Referer": kwikUrl,
+            "Cookie": cookie,
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: formData.toString()
+        });
+        if (postRes.status === 302 || postRes.status === 301) {
+          location = postRes.headers.get("location") || postRes.headers.get("Location");
+          break;
+        }
+        tries++;
+      }
+      if (location) {
+        return {
+          url: location,
+          headers: {
+            "Referer": "https://kwik.cx/",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+          }
+        };
+      }
+    } catch (e) {
+      console.error("[AnimePahe] Pahe extractor failed:", e.message);
     }
     return null;
   });
@@ -316,14 +434,51 @@ function getStreams(tmdbId, mediaType, season, episode) {
           promises.push(
             extractKwik(kwikUrl).then((res) => {
               if (res) {
+                if (res.m3u8) {
+                  streams.push({
+                    name: `AnimePahe [HLS] (${quality} ${type})`,
+                    title: `${animeTitle} - Episode ${mappedEp}`,
+                    url: res.m3u8,
+                    quality,
+                    headers: res.headers
+                  });
+                }
+                if (res.mp4) {
+                  streams.push({
+                    name: `AnimePahe ${type} - ${quality}`,
+                    title: `${animeTitle} - Episode ${mappedEp}`,
+                    url: res.mp4,
+                    quality,
+                    headers: __spreadProps(__spreadValues({}, res.headers), {
+                      "Referer": kwikUrl
+                    })
+                  });
+                }
+              }
+            }).catch(() => {
+            })
+          );
+        }
+      });
+      $("div#pickDownload a").each((i, el) => {
+        const $link = $(el);
+        const paheUrl = $link.attr("href");
+        const linkText = $link.text();
+        const quality = extractQuality(linkText);
+        const type = $link.find("span").text().toLowerCase().includes("eng") ? "Dub" : "Sub";
+        if (paheUrl && (paheUrl.includes("pahe.win") || paheUrl.includes("pahe.me") || paheUrl.includes("pahe.li") || paheUrl.includes("kwik"))) {
+          promises.push(
+            extractPahe(paheUrl).then((res) => {
+              if (res && res.url) {
                 streams.push({
-                  name: `AnimePahe | ${type} - ${quality} |`,
+                  name: `AnimePahe [Direct] (${quality} ${type})`,
                   title: `${animeTitle} - Episode ${mappedEp}`,
                   url: res.url,
                   quality,
                   headers: res.headers
                 });
               }
+            }).catch(() => {
             })
           );
         }
