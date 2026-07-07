@@ -54,7 +54,7 @@ This repository is a personal collection of public plugins made by me and others
 ## Credits
 Huge thanks to these people:
 
-- **yoruix**
+- **paregi12**
 - **D3adlyRocket**
 - **Phisher98**
 - **Sanchit**
