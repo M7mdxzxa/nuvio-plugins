@@ -132,19 +132,6 @@
       "contentLanguage": ["en", "hi"]
     },
     {
-      "id": "nuvio-kisskh",
-      "name": "KissKH",
-      "description": "Stream Korean dramas and movies from kisskh.ovh (~6s)",
-      "version": "1.0",
-      "author": "Michat88",
-      "supportedTypes": ["movie", "tv"],
-      "filename": "providers/kisskh.js",
-      "enabled": true,
-      "formats": ["mp4", "m3u8"],
-      "logo": "https://i.postimg.cc/2yLnTzPP/kisskh.jpg",
-      "contentLanguage": ["ko", "ch", "ja", "th"]
-    },
-    {
       "id": "nuvio-movieblast",
       "name": "MovieBlast",
       "description": "Direct links via MovieBlast API with multi-language support (~6s)",
