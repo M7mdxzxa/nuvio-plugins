@@ -1,0 +1,15 @@
+{
+  "name": "nuvio-plugins-api",
+  "version": "1.0.0",
+  "description": "Express API for Nuvio streaming plugins",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cheerio-without-node-native": "^0.20.2",
+    "crypto-js": "^4.2.0",
+    "express": "^4.18.2"
+  }
+}
